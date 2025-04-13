@@ -10,6 +10,7 @@
   "exports": {
     "./btree": "./lib/btree.js",
     "./builders": "./lib/builders.js",
+    "./object": "./lib/object.js",
     "./path": "./lib/path.js",
     "./print": "./lib/print.js",
     "./shorthand": "./lib/shorthand.js",
