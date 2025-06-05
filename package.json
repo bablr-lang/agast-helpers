@@ -10,13 +10,13 @@
   "exports": {
     "./btree": "./lib/btree.js",
     "./builders": "./lib/builders.js",
+    "./children": "./lib/children.js",
     "./object": "./lib/object.js",
     "./path-facade": "./lib/path-facade.js",
     "./path": "./lib/path.js",
     "./print": "./lib/print.js",
     "./shorthand": "./lib/shorthand.js",
     "./stream": "./lib/stream.js",
-    "./sumtree": "./lib/sumtree.js",
     "./symbols": "./lib/symbols.js",
     "./template": "./lib/template.js",
     "./tree": "./lib/tree.js"
