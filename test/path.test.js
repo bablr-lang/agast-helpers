@@ -8,11 +8,12 @@ import {
   nodeFlags,
   treeFromStreamSync,
   printTag,
+  fragmentFlags,
 } from '@bablr/agast-helpers/tree';
 import { expect } from 'expect';
 
 let tags = [
-  buildOpenNodeTag(),
+  buildOpenNodeTag(fragmentFlags),
   buildReferenceTag('.'),
   buildBindingTag(),
   buildOpenNodeTag(nodeFlags, 'Node'),
