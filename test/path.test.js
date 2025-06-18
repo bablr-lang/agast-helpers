@@ -6,10 +6,15 @@ import {
   buildGapTag,
   buildBindingTag,
   nodeFlags,
-  treeFromStreamSync,
+  treeFromStreamSync as treeFromStream,
   printTag,
   fragmentFlags,
+  buildBinding,
+  printPrettyCSTML,
+  buildDoctypeTag,
 } from '@bablr/agast-helpers/tree';
+import { dedent } from '@qnighy/dedent';
+
 import { expect } from 'expect';
 
 let tags = [
@@ -28,9 +33,46 @@ let tags = [
   buildCloseNodeTag(),
 ];
 
-let node = treeFromStreamSync(tags);
+let node = treeFromStream(tags);
 
-describe('Path', () => {});
+describe('Path', () => {
+  describe('replaceAt', () => {
+    it('works', () => {
+      let doc = treeFromStream([
+        buildDoctypeTag({ bablrLanguage: 'test' }),
+        buildOpenNodeTag(fragmentFlags),
+        buildReferenceTag('.'),
+        buildOpenNodeTag(nodeFlags, 'Foo'),
+        buildReferenceTag(null, 'bar'),
+        buildOpenNodeTag(nodeFlags, 'Bar'),
+        buildReferenceTag(null, 'baz'),
+        buildOpenNodeTag(nodeFlags, 'Baz'),
+        buildCloseNodeTag(),
+        buildCloseNodeTag(),
+        buildCloseNodeTag(),
+        buildCloseNodeTag(),
+      ]);
+
+      let newPath = Path.from(doc)
+        .get(['bar', 'baz'])
+        .replaceWith(
+          treeFromStream([buildOpenNodeTag(nodeFlags, 'Fuzz'), buildCloseNodeTag()]),
+          buildBinding(['MOO']),
+        );
+
+      expect(printPrettyCSTML(newPath.atDepth(0).node)).toEqual(dedent`\
+      <_>
+        .:
+        <Foo>
+          bar:
+          <Bar>
+            baz: :MOO: <Fuzz />
+          </>
+        </>
+      </>\n`);
+    });
+  });
+});
 
 describe('TagPath', () => {
   let path = Path.from(node);
