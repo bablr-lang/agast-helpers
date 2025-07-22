@@ -61,15 +61,15 @@ describe('Path', () => {
         );
 
       expect(printPrettyCSTML(newPath.atDepth(0).node)).toEqual(dedent`\
-      <_>
-        .:
-        <Foo>
-          bar:
-          <Bar>
-            baz: :MOO: <Fuzz />
+        <_>
+          .:
+          <Foo>
+            bar:
+            <Bar>
+              baz: :MOO: <Fuzz />
+            </>
           </>
-        </>
-      </>\n`);
+        </>\n`);
     });
   });
 });
