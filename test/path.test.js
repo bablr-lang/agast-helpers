@@ -39,7 +39,7 @@ describe('Path', () => {
   describe('replaceAt', () => {
     it('works', () => {
       let doc = treeFromStream([
-        buildDoctypeTag({ bablrLanguage: 'test' }),
+        buildDoctypeTag(),
         buildOpenNodeTag(fragmentFlags),
         buildReferenceTag('.'),
         buildOpenNodeTag(nodeFlags, 'Foo'),
