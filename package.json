@@ -28,6 +28,7 @@
   "dependencies": {
     "@bablr/btree": "0.4.0",
     "@bablr/coroutine": "0.1.0",
+    "@bablr/stream-iterator": "1.0.0",
     "@bablr/weak-stack": "1.0.1",
     "@iter-tools/imm-stack": "1.2.0"
   },
