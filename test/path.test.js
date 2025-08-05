@@ -53,14 +53,13 @@ describe('Path', () => {
         buildCloseNodeTag(),
       ]);
 
-      let newPath = Path.from(doc)
-        .get(['bar', 'baz'])
-        .replaceWith(
-          treeFromStream([buildOpenNodeTag(nodeFlags, 'Fuzz'), buildCloseNodeTag()]),
-          buildBinding(['MOO']),
-        );
+      let newPath = Path.from(doc).replaceAt(
+        ['bar', 'baz'],
+        treeFromStream([buildOpenNodeTag(nodeFlags, 'Fuzz'), buildCloseNodeTag()]),
+        buildBinding(['MOO']),
+      );
 
-      expect(printPrettyCSTML(newPath.atDepth(0).node)).toEqual(dedent`\
+      expect(printPrettyCSTML(newPath.node)).toEqual(dedent`\
         <_>
           .:
           <Foo>
