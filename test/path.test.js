@@ -60,13 +60,10 @@ describe('Path', () => {
       );
 
       expect(printPrettyCSTML(newPath.node)).toEqual(dedent`\
-        <_>
-          .:
-          <Foo>
-            bar:
-            <Bar>
-              baz: :MOO: <Fuzz />
-            </>
+        <Foo>
+          bar:
+          <Bar>
+            baz: :MOO: <Fuzz />
           </>
         </>\n`);
     });
