@@ -19,7 +19,7 @@ import { expect } from 'expect';
 
 let tags = [
   buildOpenNodeTag(fragmentFlags),
-  buildReferenceTag('..'),
+  buildReferenceTag('_'),
   buildBindingTag(),
   buildOpenNodeTag(nodeFlags, 'Node'),
   buildReferenceTag(null, 'inner'),
@@ -41,7 +41,7 @@ describe('Path', () => {
       let doc = treeFromStream([
         buildDoctypeTag(),
         buildOpenNodeTag(fragmentFlags),
-        buildReferenceTag('..'),
+        buildReferenceTag('_'),
         buildOpenNodeTag(nodeFlags, 'Foo'),
         buildReferenceTag(null, 'bar'),
         buildOpenNodeTag(nodeFlags, 'Bar'),
