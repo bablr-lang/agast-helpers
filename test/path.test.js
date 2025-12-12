@@ -20,22 +20,25 @@ import { expect } from 'expect';
 let tags = [
   buildOpenNodeTag(fragmentFlags),
   buildReferenceTag('_'),
-  buildBindingTag(),
+  buildBindingTag(['a']),
   buildOpenNodeTag(nodeFlags, 'Node'),
   buildReferenceTag(null, 'inner'),
-  buildBindingTag(),
+  buildBindingTag(['b']),
   buildOpenNodeTag(nodeFlags, 'InnerNode'),
   buildCloseNodeTag(),
   buildReferenceTag(null, 'gap'),
-  buildBindingTag(),
+  buildBindingTag(['c']),
   buildGapTag(),
   buildCloseNodeTag(),
   buildCloseNodeTag(),
 ];
-
-let node = treeFromStream(tags);
+let node;
 
 describe('Path', () => {
+  before(() => {
+    node = treeFromStream(tags);
+  });
+
   describe('replaceAt', () => {
     it('works', () => {
       let doc = treeFromStream([
@@ -71,6 +74,9 @@ describe('Path', () => {
 });
 
 describe('TagPath', () => {
+  before(() => {
+    node = treeFromStream(tags);
+  });
   let path = Path.from(node);
 
   describe('tagPath.nextUnshifted', () => {
