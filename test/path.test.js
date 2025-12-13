@@ -74,10 +74,11 @@ describe('Path', () => {
 });
 
 describe('TagPath', () => {
+  let path;
   before(() => {
     node = treeFromStream(tags);
+    path = Path.from(node);
   });
-  let path = Path.from(node);
 
   describe('tagPath.nextUnshifted', () => {
     it('visits tags in order', () => {
