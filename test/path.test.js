@@ -8,7 +8,7 @@ import {
   nodeFlags,
   treeFromStreamSync as treeFromStream,
   printTag,
-  fragmentFlags,
+  coverFlags,
   buildBinding,
   printPrettyCSTML,
   buildDoctypeTag,
@@ -18,7 +18,7 @@ import { dedent } from '@qnighy/dedent';
 import { expect } from 'expect';
 
 let tags = [
-  buildOpenNodeTag(fragmentFlags),
+  buildOpenNodeTag(coverFlags),
   buildReferenceTag('_'),
   buildBindingTag(['a']),
   buildOpenNodeTag(nodeFlags, 'Node'),
@@ -43,7 +43,7 @@ describe('Path', () => {
     it('works', () => {
       let doc = treeFromStream([
         buildDoctypeTag(),
-        buildOpenNodeTag(fragmentFlags),
+        buildOpenNodeTag(coverFlags),
         buildReferenceTag('_'),
         buildOpenNodeTag(nodeFlags, 'Foo'),
         buildReferenceTag(null, 'bar'),
