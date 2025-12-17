@@ -46,6 +46,7 @@ describe('Path', () => {
         buildReferenceTag('_'),
         buildOpenNodeTag(nodeFlags, 'Foo'),
         buildReferenceTag(null, 'bar'),
+        buildBindingTag(['OK']),
         buildOpenNodeTag(nodeFlags, 'Bar'),
         buildReferenceTag(null, 'baz'),
         buildOpenNodeTag(nodeFlags, 'Baz'),
@@ -63,7 +64,7 @@ describe('Path', () => {
 
       expect(printPrettyCSTML(newPath.node)).toEqual(dedent`\
         <Foo>
-          bar:
+          bar: :OK:
           <Bar>
             baz: :MOO: <Fuzz />
           </>
