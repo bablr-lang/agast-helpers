@@ -9,7 +9,6 @@ import {
   treeFromStreamSync as treeFromStream,
   printTag,
   coverFlags,
-  buildBinding,
   printPrettyCSTML,
   buildDoctypeTag,
 } from '@bablr/agast-helpers/tree';
@@ -59,7 +58,7 @@ describe('Path', () => {
       let newPath = Path.from(doc).replaceAt(
         ['bar', 'baz'],
         treeFromStream([buildOpenNodeTag(nodeFlags, 'Fuzz'), buildCloseNodeTag()]),
-        buildBinding(['MOO']),
+        [buildBindingTag(['MOO'])],
       );
 
       expect(printPrettyCSTML(newPath.node)).toEqual(dedent`\
