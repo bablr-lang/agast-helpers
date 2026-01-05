@@ -8,16 +8,16 @@ import {
   nodeFlags,
   treeFromStreamSync as treeFromStream,
   printTag,
-  coverFlags,
   printPrettyCSTML,
   buildDoctypeTag,
+  buildOpenCoverTag,
 } from '@bablr/agast-helpers/tree';
 import { dedent } from '@qnighy/dedent';
 
 import { expect } from 'expect';
 
 let tags = [
-  buildOpenNodeTag(coverFlags),
+  buildOpenCoverTag(nodeFlags),
   buildReferenceTag('_'),
   buildBindingTag(['a']),
   buildOpenNodeTag(nodeFlags, 'Node'),
@@ -42,7 +42,7 @@ describe('Path', () => {
     it('works', () => {
       let doc = treeFromStream([
         buildDoctypeTag(),
-        buildOpenNodeTag(coverFlags),
+        buildOpenCoverTag(),
         buildReferenceTag('_'),
         buildOpenNodeTag(nodeFlags, 'Foo'),
         buildReferenceTag(null, 'bar'),
