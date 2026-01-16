@@ -11,10 +11,14 @@ import {
   printPrettyCSTML,
   buildDoctypeTag,
   buildOpenCoverTag,
+  referenceFlags,
 } from '@bablr/agast-helpers/tree';
+import { ReferenceTag } from '@bablr/agast-helpers/symbols';
 import { dedent } from '@qnighy/dedent';
 
 import { expect } from 'expect';
+
+const { freeze } = Object;
 
 let tags = [
   buildOpenCoverTag(nodeFlags),
@@ -69,6 +73,58 @@ describe('Path', () => {
             baz: :MOO: <Fuzz />
           </>
         </>\n`);
+    });
+  });
+
+  describe('advance', () => {
+    it('forbids $ and $ together as they are mutually exclusive', () => {
+      expect(() => {
+        Path.fromTag(buildOpenNodeTag(nodeFlags, 'Node')).advance({
+          type: ReferenceTag,
+          value: {
+            type: null,
+            name: 'ref',
+            flags: freeze({ array: false, expression: false, intrinsic: true, hasGap: true }),
+          },
+        });
+      }).toThrowError();
+    });
+
+    it('forbids #ref[] as # is implicitly multiple', () => {
+      expect(() => {
+        Path.fromTag(buildOpenNodeTag(nodeFlags, 'Node')).advance({
+          type: ReferenceTag,
+          value: {
+            type: '#',
+            flags: freeze({ array: true, expression: false, intrinsic: false, hasGap: false }),
+          },
+        });
+      }).toThrowError();
+    });
+
+    it('forbids _ref[] as _ is implicitly single', () => {
+      expect(() => {
+        Path.fromTag(buildOpenNodeTag(nodeFlags, 'Node')).advance({
+          type: ReferenceTag,
+          value: {
+            type: '_',
+            name: null,
+            flags: freeze({ array: true, expression: false, intrinsic: false, hasGap: false }),
+          },
+        });
+      }).toThrowError();
+    });
+
+    it('forbids .: in <_>', () => {
+      expect(() => {
+        Path.fromTag(buildOpenCoverTag()).advance(buildReferenceTag('.'));
+      }).toThrowError();
+    });
+
+    it('forbids ref: in <_>', () => {
+      expect(() => {
+        Path.fromTag(buildOpenCoverTag()).advance(buildReferenceTag(null, 'ref'));
+      }).toThrowError();
     });
   });
 });
