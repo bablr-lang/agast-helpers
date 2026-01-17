@@ -12,6 +12,8 @@ import {
   buildDoctypeTag,
   buildOpenCoverTag,
   referenceFlags,
+  buildShiftTag,
+  tokenFlags,
 } from '@bablr/agast-helpers/tree';
 import { ReferenceTag } from '@bablr/agast-helpers/symbols';
 import { dedent } from '@qnighy/dedent';
@@ -124,6 +126,16 @@ describe('Path', () => {
     it('forbids ref: in <_>', () => {
       expect(() => {
         Path.fromTag(buildOpenCoverTag()).advance(buildReferenceTag(null, 'ref'));
+      }).toThrowError();
+    });
+
+    it('forbids shifting node into token', () => {
+      expect(() => {
+        Path.fromTag(buildOpenCoverTag())
+          .advance(buildReferenceTag('_'))
+          .advance(buildOpenNodeTag(nodeFlags, 'Node', null, {}, true))
+          .advance(buildShiftTag())
+          .advance(buildOpenNodeTag(tokenFlags, 'OuterToken'));
       }).toThrowError();
     });
   });
