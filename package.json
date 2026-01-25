@@ -26,7 +26,7 @@
     "test": "mocha test/*.test.js"
   },
   "dependencies": {
-    "@bablr/btree": "0.4.2",
+    "@bablr/btree": "0.4.3",
     "@bablr/coroutine": "0.1.0",
     "@bablr/stream-iterator": "2.0.0",
     "@iter-tools/imm-stack": "1.2.0"
