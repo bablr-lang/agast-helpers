@@ -15,6 +15,7 @@
     "./path": "./lib/path.js",
     "./print": "./lib/print.js",
     "./shorthand": "./lib/shorthand.js",
+    "./spans": "./lib/spans.js",
     "./stream": "./lib/stream.js",
     "./symbols": "./lib/symbols.js",
     "./tags": "./lib/tags.js",
