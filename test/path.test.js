@@ -11,7 +11,6 @@ import {
   printPrettyCSTML,
   buildDoctypeTag,
   buildOpenCoverTag,
-  referenceFlags,
   buildShiftTag,
   tokenFlags,
 } from '@bablr/agast-helpers/tree';
@@ -69,10 +68,13 @@ describe('Path', () => {
       );
 
       expect(printPrettyCSTML(newPath.node)).toEqual(dedent`\
-        <Foo>
-          bar: :OK:
-          <Bar>
-            baz: :MOO: <Fuzz />
+        <_>
+          _:
+          <Foo>
+            bar: :OK:
+            <Bar>
+              baz: :MOO: <Fuzz />
+            </>
           </>
         </>\n`);
     });
