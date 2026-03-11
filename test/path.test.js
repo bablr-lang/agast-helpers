@@ -1,3 +1,4 @@
+import '@bablr/deep-freeze/register';
 import { Path, TagPath } from '@bablr/agast-helpers/path';
 import {
   buildOpenNodeTag,
