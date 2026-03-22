@@ -8,14 +8,15 @@
     "lib"
   ],
   "exports": {
-    "./btree": "./lib/btree.js",
+    "./b-list": "./lib/b-list.js",
+    "./b-map": "./lib/b-map.js",
+    "./b-set": "./lib/b-set.js",
     "./builders": "./lib/builders.js",
     "./object": "./lib/object.js",
     "./path-facade": "./lib/path-facade.js",
     "./path": "./lib/path.js",
     "./print": "./lib/print.js",
     "./shorthand": "./lib/shorthand.js",
-    "./spans": "./lib/spans.js",
     "./stream": "./lib/stream.js",
     "./symbols": "./lib/symbols.js",
     "./tags": "./lib/tags.js",
@@ -33,6 +34,7 @@
     "@iter-tools/imm-stack": "1.2.0"
   },
   "devDependencies": {
+    "@bablr/deep-freeze": "1.0.0",
     "@bablr/eslint-config-base": "github:bablr-lang/eslint-config-base#23b94fb3bdfdbc3ac7ed9cb58d7979d8f07dce2b",
     "@qnighy/dedent": "0.1.1",
     "enhanced-resolve": "^5.12.0",
