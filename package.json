@@ -8,6 +8,7 @@
     "lib"
   ],
   "exports": {
+    "./b-list-keyed": "./lib/b-list-keyed.js",
     "./b-list": "./lib/b-list.js",
     "./b-map": "./lib/b-map.js",
     "./b-set": "./lib/b-set.js",
