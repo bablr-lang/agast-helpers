@@ -6,7 +6,7 @@ import {
   buildGapTag,
   buildBindingTag,
   nodeFlags,
-  treeFromStreamSync as treeFromStream,
+  treeFromStream,
   printTag,
   printPrettyCSTML,
   buildDoctypeTag,
