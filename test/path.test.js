@@ -1,19 +1,5 @@
 import { Path, TagPath } from '@bablr/agast-helpers/path';
-import {
-  buildOpenNodeTag,
-  buildCloseNodeTag,
-  buildReferenceTag,
-  buildGapTag,
-  buildBindingTag,
-  nodeFlags,
-  treeFromStream,
-  printTag,
-  printPrettyCSTML,
-  buildDoctypeTag,
-  buildOpenCoverTag,
-  buildShiftTag,
-  tokenFlags,
-} from '@bablr/agast-helpers/tree';
+import { treeFromStream, printTag, printPrettyCSTML } from '@bablr/agast-helpers/tree';
 import { ReferenceTag } from '@bablr/agast-helpers/symbols';
 import { dedent } from '@qnighy/dedent';
 
@@ -22,19 +8,19 @@ import { expect } from 'expect';
 const { freeze } = Object;
 
 let tags = [
-  buildOpenCoverTag(nodeFlags),
-  buildReferenceTag('_'),
-  buildBindingTag(['a']),
-  buildOpenNodeTag(nodeFlags, 'Node'),
-  buildReferenceTag(null, 'inner'),
-  buildBindingTag(['b']),
-  buildOpenNodeTag(nodeFlags, 'InnerNode'),
-  buildCloseNodeTag(),
-  buildReferenceTag(null, 'gap'),
-  buildBindingTag(['c']),
-  buildGapTag(),
-  buildCloseNodeTag(),
-  buildCloseNodeTag(),
+  '<_>',
+  '_:',
+  ':a:',
+  '<Node>',
+  'inner:',
+  ':b:',
+  '<InnerNode>',
+  '</>',
+  'gap:',
+  ':c:',
+  '<//>',
+  '</>',
+  '</>',
 ];
 let node;
 
@@ -46,26 +32,24 @@ describe('Path', () => {
   describe('replaceAt', () => {
     it('works', () => {
       let doc = treeFromStream([
-        buildDoctypeTag(),
-        buildOpenCoverTag(),
-        buildReferenceTag('_'),
-        buildOpenNodeTag(nodeFlags, 'Foo'),
-        buildReferenceTag(null, 'bar'),
-        buildBindingTag(['OK']),
-        buildOpenNodeTag(nodeFlags, 'Bar'),
-        buildReferenceTag(null, 'baz'),
-        buildOpenNodeTag(nodeFlags, 'Baz'),
-        buildCloseNodeTag(),
-        buildCloseNodeTag(),
-        buildCloseNodeTag(),
-        buildCloseNodeTag(),
+        '<!0:cstml>',
+        '<_>',
+        '_:',
+        '<Foo>',
+        'bar:',
+        ':OK:',
+        '<Bar>',
+        'baz:',
+        '<Baz>',
+        '</>',
+        '</>',
+        '</>',
+        '</>',
       ]);
 
-      let newPath = Path.from(doc).replaceAt(
-        ['bar', 'baz'],
-        treeFromStream([buildOpenNodeTag(nodeFlags, 'Fuzz'), buildCloseNodeTag()]),
-        [buildBindingTag(['MOO'])],
-      );
+      let newPath = Path.from(doc).replaceAt(['bar', 'baz'], treeFromStream(['<Fuzz>', '</>']), [
+        ':MOO:',
+      ]);
 
       expect(printPrettyCSTML(newPath.node)).toEqual(dedent`\
         <_>
@@ -83,7 +67,7 @@ describe('Path', () => {
   describe('advance', () => {
     it('forbids $ and $ together as they are mutually exclusive', () => {
       expect(() => {
-        Path.fromTag(buildOpenNodeTag(nodeFlags, 'Node')).advance({
+        Path.fromTag('<Node>').advance({
           type: ReferenceTag,
           value: {
             type: null,
@@ -96,7 +80,7 @@ describe('Path', () => {
 
     it('forbids #ref[] as # is implicitly multiple', () => {
       expect(() => {
-        Path.fromTag(buildOpenNodeTag(nodeFlags, 'Node')).advance({
+        Path.fromTag('<Node>').advance({
           type: ReferenceTag,
           value: {
             type: '#',
@@ -108,7 +92,7 @@ describe('Path', () => {
 
     it('forbids _ref[] as _ is implicitly single', () => {
       expect(() => {
-        Path.fromTag(buildOpenNodeTag(nodeFlags, 'Node')).advance({
+        Path.fromTag('<Node>').advance({
           type: ReferenceTag,
           value: {
             type: '_',
@@ -121,23 +105,23 @@ describe('Path', () => {
 
     it('forbids .: in <_>', () => {
       expect(() => {
-        Path.fromTag(buildOpenCoverTag()).advance(buildReferenceTag('.'));
+        Path.fromTag('<_>').advance('.:');
       }).toThrowError();
     });
 
     it('forbids ref: in <_>', () => {
       expect(() => {
-        Path.fromTag(buildOpenCoverTag()).advance(buildReferenceTag(null, 'ref'));
+        Path.fromTag('<_>').advance('ref:');
       }).toThrowError();
     });
 
     it('forbids shifting node into token', () => {
       expect(() => {
-        Path.fromTag(buildOpenCoverTag())
-          .advance(buildReferenceTag('_'))
-          .advance(buildOpenNodeTag(nodeFlags, 'Node', null, {}, true))
-          .advance(buildShiftTag())
-          .advance(buildOpenNodeTag(tokenFlags, 'OuterToken'));
+        Path.fromTag('<_>')
+          .advance('_:')
+          .advance('<Node />')
+          .advance('^^^')
+          .advance('<*OuterToken>');
       }).toThrowError();
     });
   });
