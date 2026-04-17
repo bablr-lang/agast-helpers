@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@bablr/btree": "0.4.5",
-    "@bablr/coroutine": "0.1.0",
+    "@bablr/coroutine": "1.0.0",
     "@bablr/stream-iterator": "2.0.0",
     "@iter-tools/imm-stack": "1.2.0"
   },
