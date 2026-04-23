@@ -15,6 +15,7 @@
     "./builders": "./lib/builders.js",
     "./debug": "./lib/debug.js",
     "./debug/register": "./lib/debug.register.js",
+    "./iterable": "./lib/iterable.js",
     "./object": "./lib/object.js",
     "./path": "./lib/path.js",
     "./print": "./lib/print.js",
@@ -36,7 +37,7 @@
     "@iter-tools/imm-stack": "1.2.0"
   },
   "devDependencies": {
-    "@bablr/deep-freeze": "1.0.0",
+    "@bablr/record": "1.0.0",
     "@bablr/eslint-config-base": "github:bablr-lang/eslint-config-base#23b94fb3bdfdbc3ac7ed9cb58d7979d8f07dce2b",
     "@qnighy/dedent": "0.1.1",
     "enhanced-resolve": "^5.12.0",
