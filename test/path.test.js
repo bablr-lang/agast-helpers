@@ -64,6 +64,36 @@ describe('Path', () => {
     });
   });
 
+  describe('removeAt', () => {
+    it('works', () => {
+      let doc = treeFromStream([
+        '<!0:cstml>',
+        '<_>',
+        '_:',
+        '<Foo>',
+        'bar:',
+        ':OK:',
+        '<Bar>',
+        'baz:',
+        '<Baz>',
+        '</>',
+        '</>',
+        '</>',
+        '</>',
+      ]);
+
+      let newPath = Path.from(doc).removeAt(['bar', 'baz']);
+
+      expect(printPrettyCSTML(newPath.node)).toEqual(dedent`\
+        <_>
+          _:
+          <Foo>
+            bar: :OK: <Bar />
+          </>
+        </>\n`);
+    });
+  });
+
   describe('advance', () => {
     it('forbids $ and $ together as they are mutually exclusive', () => {
       expect(() => {

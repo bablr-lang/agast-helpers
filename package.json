@@ -17,6 +17,7 @@
     "./debug/register": "./lib/debug.register.js",
     "./iterable": "./lib/iterable.js",
     "./object": "./lib/object.js",
+    "./parse": "./lib/parse.js",
     "./path": "./lib/path.js",
     "./print": "./lib/print.js",
     "./shorthand": "./lib/shorthand.js",
