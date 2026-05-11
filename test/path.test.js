@@ -1,6 +1,8 @@
 import { Path, TagPath } from '@bablr/agast-helpers/path';
 import { treeFromStream, printTag, printPrettyCSTML } from '@bablr/agast-helpers/tree';
+import { transformStream } from '@bablr/agast-helpers/stream';
 import { ReferenceTag } from '@bablr/agast-helpers/symbols';
+import { isObject } from '@bablr/agast-helpers/object';
 import { dedent } from '@qnighy/dedent';
 
 import { expect } from 'expect';
