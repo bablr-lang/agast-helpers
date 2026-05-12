@@ -53,7 +53,7 @@ describe('Path', () => {
         ':MOO:',
       ]);
 
-      expect(printPrettyCSTML(newPath.node)).toEqual(dedent`\
+      expect(printPrettyCSTML(newPath.node)).toEqual(dedent`
         <_>
           _:
           <Foo>
@@ -86,7 +86,7 @@ describe('Path', () => {
 
       let newPath = Path.from(doc).removeAt(['bar', 'baz']);
 
-      expect(printPrettyCSTML(newPath.node)).toEqual(dedent`\
+      expect(printPrettyCSTML(newPath.node)).toEqual(dedent`
         <_>
           _:
           <Foo>
