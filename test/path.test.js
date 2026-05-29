@@ -1,7 +1,6 @@
 import { Path, TagPath } from '@bablr/agast-helpers/path';
 import { treeFromStream, printTag, printPrettyCSTML } from '@bablr/agast-helpers/tree';
 import { transformStream } from '@bablr/agast-helpers/stream';
-import { ReferenceTag } from '@bablr/agast-helpers/symbols';
 import { isObject } from '@bablr/agast-helpers/object';
 import { dedent } from '@qnighy/dedent';
 
@@ -18,6 +17,7 @@ let tags = [
   ':b:',
   '<InnerNode>',
   '</>',
+  '##ab##',
   'gap:',
   ':c:',
   '<//>',
@@ -99,41 +99,21 @@ describe('Path', () => {
   });
 
   describe('advance', () => {
-    it('forbids $ and $ together as they are mutually exclusive', () => {
+    it('forbids * and $ together as they are mutually exclusive', () => {
       expect(() => {
-        Path.fromTag('<Node>').advance({
-          type: ReferenceTag,
-          value: {
-            type: null,
-            name: 'ref',
-            flags: freeze({ array: false, expression: false, intrinsic: true, hasGap: true }),
-          },
-        });
+        Path.fromTag('<Node>').advance('ref*$:');
       }).toThrowError();
     });
 
-    it('forbids #ref[] as # is implicitly multiple', () => {
+    it('forbids #[] as # is implicitly multiple', () => {
       expect(() => {
-        Path.fromTag('<Node>').advance({
-          type: ReferenceTag,
-          value: {
-            type: '#',
-            flags: freeze({ array: true, expression: false, intrinsic: false, hasGap: false }),
-          },
-        });
+        Path.fromTag('<Node>').advance('#[]:');
       }).toThrowError();
     });
 
-    it('forbids _ref[] as _ is implicitly single', () => {
+    it('forbids _[] as _ is implicitly single', () => {
       expect(() => {
-        Path.fromTag('<Node>').advance({
-          type: ReferenceTag,
-          value: {
-            type: '_',
-            name: null,
-            flags: freeze({ array: true, expression: false, intrinsic: false, hasGap: false }),
-          },
-        });
+        Path.fromTag('<Node>').advance('_[]:');
       }).toThrowError();
     });
 
