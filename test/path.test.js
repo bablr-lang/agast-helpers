@@ -152,7 +152,7 @@ describe('TagPath', () => {
     it('visits tags in order', () => {
       let tagPath;
 
-      tagPath = TagPath.from(path, 0);
+      tagPath = TagPath.from(path, 1);
 
       let i = 0;
       while (tagPath) {
@@ -166,7 +166,7 @@ describe('TagPath', () => {
     it('visits tags in shifted order', () => {
       let tagPath;
 
-      tagPath = TagPath.from(path, 0);
+      tagPath = TagPath.from(path, 1);
 
       let i = 0;
       while (tagPath) {
