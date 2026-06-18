@@ -85,7 +85,7 @@ describe('Tags', () => {
         let expected = dedent`\
       `;
 
-        expect(printTree(Tags.removeAt([2, 1, 0], tree))).toEqual(expected);
+        expect(printTree(Tags.removeAt([2, 1], tree))).toEqual(expected);
       });
     });
 
