@@ -61,15 +61,20 @@ describe('Tags', () => {
 
         tree = Tags.push('<__>', tree);
         tree = Tags.push('"fad"', tree);
-        tree = Tags.push('"borg"', tree);
-        tree = Tags.push('"neftli"', tree);
-        tree = Tags.push('"grong"', tree);
+        tree = Tags.push('"borfg"', tree);
+        tree = Tags.push('"sdnerk"', tree);
+        tree = Tags.push('"tarsked"', tree);
+        tree = Tags.push('"emdzeel"', tree);
+        tree = Tags.push('"floerzd"', tree);
+        tree = Tags.push('"ggrong"', tree);
+        tree = Tags.push('"blany"', tree);
+        tree = Tags.push('"748392"', tree);
         tree = Tags.push('</>', tree);
 
         let expected = dedent`\
       `;
 
-        expect(printTree(Tags.removeAt([2, 0, 1], tree))).toEqual(expected);
+        expect(printTree(Tags.removeAt([2, 2, 2], tree))).toEqual(expected);
       });
 
       it('removes an element from the middle of a node', () => {
@@ -91,10 +96,35 @@ describe('Tags', () => {
 
     describe('when a post-removal join is not required', () => {
       it('removes an element that ends a node', () => {
-        let expected = dedent`\
-      `;
+        let tree = Tags.fromValues([Tags.empty()]);
 
-        expect(printTree(Tags.removeAt([2, 1, 0], tree))).toEqual(expected);
+        tree = Tags.push('<__>', tree);
+        tree = Tags.push('"fad"', tree);
+        tree = Tags.push('"borg"', tree);
+        tree = Tags.push('"neftli"', tree);
+        tree = Tags.push('"grong"', tree);
+        tree = Tags.push('</>', tree);
+
+        let expected = dedent`\
+          ##89e5##
+          <__>
+            <__>
+              ##3dd0##
+              <__>
+                ##8cd1##
+                <__>
+                  \"fad\"
+                </>
+                ##805a##
+                <__>
+                  \"neftli\"
+                  \"grong\"
+                </>
+              </>
+            </>
+          </>`;
+
+        expect(printTree(Tags.removeAt([2, 0, 1], tree))).toEqual(expected);
       });
 
       it('removes an element from the middle of a node', () => {
