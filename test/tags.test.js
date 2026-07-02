@@ -5,14 +5,16 @@ import { dedent } from '@qnighy/dedent';
 import { expect } from 'expect';
 
 describe('Tags', () => {
-  describe('__spliceNew', () => {
-    let tree = Tags.fromValues([Tags.empty()]);
+  describe('__splice', () => {
+    it('works', () => {
+      let tree = Tags.fromValues([Tags.empty()]);
 
-    tree = Tags.push('"fadd"', tree);
-    tree = Tags.push('"boof"', tree); // brew
-    tree = Tags.push('"neftdli"', tree);
-    tree = Tags.push('"grg"', tree);
+      tree = Tags.push('"fadd"', tree);
+      tree = Tags.push('"boof"', tree); // brew
+      tree = Tags.push('"neftdli"', tree);
+      tree = Tags.push('"grg"', tree);
 
-    Tags.__spliceNew();
+      // Tags.__splice();
+    });
   });
 });
