@@ -1,5 +1,5 @@
 import { Path, TagPath } from '@bablr/agast-helpers/path';
-import { treeFromStream, printTag, printPrettyCSTML } from '@bablr/agast-helpers/tree';
+import { treeFromStream, printTag, printCSTML } from '@bablr/agast-helpers/tree';
 import { transformStream } from '@bablr/agast-helpers/stream';
 import { isObject } from '@bablr/agast-helpers/object';
 import { dedent } from '@qnighy/dedent';
@@ -53,7 +53,7 @@ describe('Path', () => {
         ':MOO:',
       ]);
 
-      expect(printPrettyCSTML(newPath.node)).toEqual(dedent`
+      expect(printCSTML(newPath.node)).toEqual(dedent`
         <_>
           _:
           <Foo>
@@ -87,7 +87,7 @@ describe('Path', () => {
 
       let newPath = Path.from(doc).removeAt(['bar', 'baz']);
 
-      expect(printPrettyCSTML(newPath.node)).toEqual(dedent`
+      expect(printCSTML(newPath.node)).toEqual(dedent`
         <_>
           _:
           <Foo>
