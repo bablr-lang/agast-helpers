@@ -156,7 +156,7 @@ describe('TagPath', () => {
 
       let i = 0;
       while (tagPath) {
-        expect([i, printTag(tagPath.tag)]).toEqual([i, printTag(tags[i++])]);
+        expect([i, tagPath.tag]).toEqual([i, tags[i++]]);
         tagPath = tagPath.nextUnshifted;
       }
     });
@@ -170,7 +170,7 @@ describe('TagPath', () => {
 
       let i = 0;
       while (tagPath) {
-        expect([i, printTag(tagPath.tag)]).toEqual([i, printTag(tags[i++])]);
+        expect([i, tagPath.tag]).toEqual([i, tags[i++]]);
         tagPath = tagPath.next;
       }
     });
