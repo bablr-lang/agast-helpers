@@ -7,7 +7,7 @@ import { expect } from 'expect';
 describe('Tags', () => {
   describe('__splice', () => {
     it('works', () => {
-      let tree = Tags.fromValues([Tags.empty()]);
+      let tree = Tags.fromValues(['']);
 
       tree = Tags.push('"fadd"', tree);
       tree = Tags.push('"boof"', tree); // brew
