@@ -36,6 +36,7 @@
     "@bablr/btree": "1.0.0",
     "@bablr/coroutine": "1.0.1",
     "@bablr/stream-iterator": "3.0.0",
+    "@bablr/stream-helpers": "1.0.0",
     "@iter-tools/imm-stack": "1.2.0"
   },
   "devDependencies": {

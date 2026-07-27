@@ -1,5 +1,5 @@
 import { Path, TagPath } from '@bablr/agast-helpers/path';
-import { treeFromStream, printTag, printCSTML } from '@bablr/agast-helpers/tree';
+import { treeFromStream, printCSTML } from '@bablr/agast-helpers/tree';
 import { transformStream } from '@bablr/agast-helpers/stream';
 import { isObject } from '@bablr/agast-helpers/object';
 import { dedent } from '@qnighy/dedent';
