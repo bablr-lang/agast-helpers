@@ -148,22 +148,8 @@ describe('TagPath', () => {
     path = Path.from(node);
   });
 
-  describe('tagPath.nextUnshifted', () => {
-    it('visits tags in order', () => {
-      let tagPath;
-
-      tagPath = TagPath.from(path, 0);
-
-      let i = 0;
-      while (tagPath) {
-        expect([i, tagPath.tag]).toEqual([i, tags[i++]]);
-        tagPath = tagPath.nextUnshifted;
-      }
-    });
-  });
-
   describe('tagPath.next', () => {
-    it('visits tags in shifted order', () => {
+    it('visits tags in order', () => {
       let tagPath;
 
       tagPath = TagPath.from(path, 0);
