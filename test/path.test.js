@@ -162,3 +162,26 @@ describe('TagPath', () => {
     });
   });
 });
+
+describe('treeFromStream', () => {
+  it('shifts', () => {
+    expect(
+      printCSTML(
+        treeFromStream([
+          '<Statement>',
+          'expression:',
+          '<^>',
+          "<Number '2' />",
+          '^^^',
+          '<BinaryEpxression>',
+          'left: <//>',
+          "op: <* '+' />",
+          "right: <Number '2' />",
+          '</>',
+          '</>',
+          '</>',
+        ]),
+      ),
+    ).toBe('');
+  });
+});
