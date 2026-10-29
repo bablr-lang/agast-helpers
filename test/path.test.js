@@ -101,37 +101,37 @@ describe('Path', () => {
   describe('advance', () => {
     it('forbids * and $ together as they are mutually exclusive', () => {
       expect(() => {
-        Path.fromTag('<Node>').advance('ref*$:');
+        Path.advance(null, '<Node>').advance('ref*$:');
       }).toThrowError();
     });
 
     it('forbids #[] as # is implicitly multiple', () => {
       expect(() => {
-        Path.fromTag('<Node>').advance('#[]:');
+        Path.advance(null, '<Node>').advance('#[]:');
       }).toThrowError();
     });
 
     it('forbids _[] as _ is implicitly single', () => {
       expect(() => {
-        Path.fromTag('<Node>').advance('_[]:');
+        Path.advance(null, '<Node>').advance('_[]:');
       }).toThrowError();
     });
 
     it('forbids .: in <_>', () => {
       expect(() => {
-        Path.fromTag('<_>').advance('.:');
+        Path.advance(null, '<_>').advance('.:');
       }).toThrowError();
     });
 
     it('forbids ref: in <_>', () => {
       expect(() => {
-        Path.fromTag('<_>').advance('ref:');
+        Path.advance(null, '<_>').advance('ref:');
       }).toThrowError();
     });
 
     it('forbids shifting node into token', () => {
       expect(() => {
-        Path.fromTag('<_>')
+        Path.advance(null, '<_>')
           .advance('_:')
           .advance('<Node />')
           .advance('^^^')
