@@ -173,15 +173,26 @@ describe('treeFromStream', () => {
           '<^>',
           "<Number '2' />",
           '^^^',
-          '<BinaryEpxression>',
-          'left: <//>',
-          "op: <* '+' />",
-          "right: <Number '2' />",
+          '<BinaryExpression>',
+          'left:',
+          '<//>',
+          'op:',
+          "<* '+' />",
+          'right:',
+          "<Number '2' />",
           '</>',
           '</>',
           '</>',
         ]),
       ),
-    ).toBe('');
+    ).toBe(dedent`
+      <Statement>
+        expression:
+        <BinaryExpression>
+          left: <Number '2' />
+          op: <* '+' />
+          right: <Number '2' />
+        </>
+      </>\n`);
   });
 });
