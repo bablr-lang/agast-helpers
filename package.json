@@ -13,6 +13,7 @@
     "./b-map": "./lib/b-map.js",
     "./b-set": "./lib/b-set.js",
     "./builders": "./lib/builders.js",
+    "./component": "./lib/component.js",
     "./debug": "./lib/debug.js",
     "./debug/register": "./lib/debug.register.js",
     "./iterable": "./lib/iterable.js",
